@@ -1,7 +1,7 @@
 ;;; ltl-rust.el --- rust and basic lsp config.
 ;;; Commentary:
 
-;; rustic + lsp-mode + yasnippet
+;; rustic + lsp-mode + yasnippet + treesiter
 
 ;;; Code:
 
