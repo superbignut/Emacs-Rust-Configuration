@@ -26,6 +26,12 @@
 (add-to-list 'load-path
 	     (expand-file-name (concat user-emacs-directory "lisp")))
 
+(setq auto-save-file-name-transforms
+          `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name (concat user-emacs-directory "backups")))))
+
 (tool-bar-mode -1) ;;close tool-bar
 
 (scroll-bar-mode -1) ;;close-scroll-bar
