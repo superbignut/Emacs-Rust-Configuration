@@ -5,30 +5,44 @@
 ---
 ## 前言：
 + ### 1. 简介：
-    这是一个面向新手 ~~我自己~~ 的渐进式的 Emacs配置文件，并对每一行配置进行必要甚至冗余的解释。
+    这是一个面向新手 ~~我自己~~ 的用于写Rust的 Emacs 配置，目前只有3个配置文件。
 
-    ~~This is an Emacs configuration file writen line by line，with annotations provided wherever possible.~~
-+ ### 2. 建议：
-    + Emacs具有极其舒适的学习曲线。学习 Emacs的过程如同打怪升级。因此建议 ~~我自己~~ 好好学习 Emacs。
-    + 如果想用Emacs写rust，请务必去看一下面的参考11，无敌强推，相见恨晚。
 
-+ ### 3. 参考：
+    + init.el 包含了最基本的配置和一些修改。
+    + lisp/treemacs.el 是treemacs官方配置，~~只修改了两行~~。
+    + lisp/rust.el 内容主要来自[参考11][12]，并使用 tree-sitter 强化了代码高亮。
+
+
++ ### 2. 主要插件：
+
+    + lsp-mode 
+    + rust-mode / rustic
+    + lsp-ui 
+    + tree-sitter
+
++ ### 3. Emacs截图：
+
+![Normal]()
+
+![Error]()
+
++ ### 3. 基本配置参考：
     1. Emacs欢迎界面上的Emacs tutorial。包含了Emacs的最基本按键和功能，入门第一看。
     2. B站/知乎上的[《Emacs高手修炼手册》][1]一步一步配置出Emacs的基本功能，入门必备。
     3. NykMa个人网站上的[《Emacs 自力求生指南》][2]有他对的Emacs配置的详细说明，入门必备。
     4. 子龙山人的[《21天学会Emacs》][3]，入门必备，慢慢回味。
     5. Github的Awesome系列[awesome-elisp][5]，其中的[Emacs In A Box - Elisp Programming][6]，入门必备。
-    6. 没事的时候要去逛一逛的[Emacs-China][4]，没记错的话也是子龙山人创建的。
+    6. 没事的时候要去逛一逛的[Emacs-China][4],会有大佬的配置发在上面。
     7. 最官方的Emacs手册[GNU Emacs manual][7]，但是内容实在太多了。
     8. 最官方的Elisp参考手册[Emacs Lisp Reference Manual][8]，内容也是特别多。
     9. Emacs官网的不那么硬核的[An Introduction to Programming in Emacs Lisp][9]，前几章入门必备。
-    10. tuhdo的一系列教程[Emacs mini manual series][11]，甚至还有Helm教程，入门强推。
+    10. tuhdo的一系列教程[Emacs mini manual series][11]，甚至还有Helm教程。但最近404了。
     11. Robert Krahn的[Emacs-Rust][12]入门级详细配置，包括lsp，rustic，lsp-ui，无敌强推。
 
 
 ## 内容：
 
-### 以下均为在Ubuntu22.04中对Emacs27/29的个人配置和理解，不保证内容完全正确。
+### 以下均为在Ubuntu22.04中对Emacs27/29的个人配置和理解
 ---
 
         (tool-bar-mode -1)
