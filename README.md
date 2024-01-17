@@ -22,11 +22,11 @@
 
 + ### 3. Emacs截图：
 
-![Normal]()
+![Normal](https://github.com/superbignut/Emacs-SMCM/blob/master/screenshots/normal.png)
 
-![Error]()
+![Error](https://github.com/superbignut/Emacs-SMCM/blob/master/screenshots/error.png)
 
-+ ### 3. 基本配置参考：
++ ### 4. 配置参考：
     1. Emacs欢迎界面上的Emacs tutorial。包含了Emacs的最基本按键和功能，入门第一看。
     2. B站/知乎上的[《Emacs高手修炼手册》][1]一步一步配置出Emacs的基本功能，入门必备。
     3. NykMa个人网站上的[《Emacs 自力求生指南》][2]有他对的Emacs配置的详细说明，入门必备。
