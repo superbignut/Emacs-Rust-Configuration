@@ -2,8 +2,9 @@
 ;;; Commentary:
 
 ;; This file bootstraps the configuration, which is divided into
-;; a number of other files.
+;; a number of other files in the lisp/ folder.
 
+;; Besides, the order of the followed configuration is meaningful.
 
 ;;; Code:
 (if (window-system) (set-frame-size (selected-frame) 190 55)) ;;window size.
@@ -26,11 +27,11 @@
 (add-to-list 'load-path
 	     (expand-file-name (concat user-emacs-directory "lisp")))
 
-(setq auto-save-file-name-transforms
-          `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+;; (setq auto-save-file-name-transforms
+;;           `((".*" ,(concat user-emacs-directory "auto-save") t)))
 
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name (concat user-emacs-directory "backups")))))
+;; (setq backup-directory-alist
+;;       `(("." . ,(expand-file-name (concat user-emacs-directory "backups")))))
 
 (tool-bar-mode -1) ;;close tool-bar
 

@@ -12,6 +12,9 @@
   (setq lsp-lens-enable nil)
   (setq lsp-ui-doc-show-with-cursor t)
   (setq lsp-ui-doc-delay 1)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-eldoc-enable-hover nil)
+  (setq lsp-modeline-code-actions-enable nil)
   :config
   (lsp-enable-which-key-integration t)
   :custom
