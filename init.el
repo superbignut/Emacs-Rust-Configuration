@@ -33,6 +33,34 @@
 ;; (setq backup-directory-alist
 ;;       `(("." . ,(expand-file-name (concat user-emacs-directory "backups")))))
 
+(defun split-and-follow-horizontally ()
+  "."
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+(defun split-and-follow-vertically ()
+  "."
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+
+(defun copy-line ()
+  "Copy lines."
+  (interactive)
+  (save-excursion
+    (back-to-indentation)
+    (kill-ring-save
+     (point)
+     (line-end-position)))
+     (message "1 line copied"))
+
+(global-set-key "\C-c\C-k" 'copy-line)
+
 (tool-bar-mode -1) ;;close tool-bar
 
 (scroll-bar-mode -1) ;;close-scroll-bar
