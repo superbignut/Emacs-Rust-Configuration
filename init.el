@@ -142,6 +142,13 @@
 
 (require 'ltl-rust)
 
+;; (add-to-list 'load-path
+;; 	     (expand-file-name (concat user-emacs-directory "lisp/lsp-bridge")))
+
+;; (require 'lsp-bridge)
+;; (global-lsp-bridge-mode)
+
+
 (use-package marginalia
   :init
   (marginalia-mode))
@@ -279,6 +286,8 @@
 ;;   :after evil
 ;;   :config
 ;;   (evil-collection-init))
+
+(use-package org)
 
 (use-package smartparens-config
   :ensure smartparens

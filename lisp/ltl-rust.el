@@ -49,10 +49,10 @@
 ;;  (lsp-ui-sideline-show-hover t)
   (lsp-ui-doc-enable t)
   (lsp-ui-sideline-show-diagnostics t)
-  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-show-code-actions nil)
   (lsp-ui-sideline-update-mode t)
   (lsp-ui-sideline-delay 0.6)
-  (lsp-ui-sideline-diagnostic-max-lines 3))
+  (lsp-ui-sideline-diagnostic-max-lines 5))
 
 (use-package rustic
   :ensure
@@ -73,10 +73,16 @@
   (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 
+(use-package lsp-python-ms
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-python-ms)
+                         (lsp))))
+
 (use-package tree-sitter
- :config
- (global-tree-sitter-mode)
- (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs)
 
