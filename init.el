@@ -49,6 +49,15 @@
   (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
+(defun split-and-follow-vertically-and-eshell ()
+  "."
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1)
+  (eshell))
+(global-set-key (kbd "C-x 4") 'split-and-follow-vertically-and-eshell)
+
 (defun copy-line ()
   "Copy lines."
   (interactive)
@@ -57,7 +66,7 @@
     (kill-ring-save
      (point)
      (line-end-position)))
-     (message "1 line copied"))
+  (message "1 line copied"))
 
 (global-set-key "\C-c\C-k" 'copy-line)
 

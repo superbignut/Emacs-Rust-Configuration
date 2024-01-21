@@ -40,7 +40,8 @@
   :hook
   (lsp-mode . lsp-ui-mode)
   (c-mode . lsp)
-  (c++-mode . lsp))
+  (c++-mode . lsp)
+  (python-mode . lsp))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
