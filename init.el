@@ -67,7 +67,6 @@
      (point)
      (line-end-position)))
   (message "1 line copied"))
-
 (global-set-key "\C-c\C-k" 'copy-line)
 
 (tool-bar-mode -1) ;;close tool-bar
@@ -117,9 +116,9 @@
 
 (global-set-key (kbd "C-h C-f") 'find-function)
 
-(global-set-key (kbd "M-p") (lambda () (interactive) (move-to-window-line 0)))
+;; (global-set-key (kbd "M-p") (lambda () (interactive) (move-to-window-line 0)))
 
-(global-set-key (kbd "M-n") (lambda () (interactive) (move-to-window-line -1)))
+;; (global-set-key (kbd "M-n") (lambda () (interactive) (move-to-window-line -1)))
 
 (setq visible-bell t) ;; flash replace bell.
 
@@ -133,7 +132,6 @@
 			 ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
 
 (require 'package)
-
 
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
@@ -201,8 +199,7 @@
 (defun set-company-tab ()
   "."
   (define-key company-active-map [tab] 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (define-key company-active-map (kbd "TAB") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  )
+  (define-key company-active-map (kbd "TAB") 'company-select-next-if-tooltip-visible-or-complete-selection))
 
 (set-company-tab)
 
@@ -298,12 +295,27 @@
 
 (use-package org)
 
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
+(use-package multiple-cursors
+  :bind (("C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this-symbol)
+         ("C-M->" . mc/skip-to-next-like-this)
+         ("C-<" . mc/mark-previous-like-this-symbol)
+         ("C-M-<" . mc/skip-to-previous-like-this)
+         ("C-c C->" . mc/mark-all-symbols-like-this)))
+
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode 1))
+
+;;Todo use-package hydra
+
 (use-package smartparens-config
   :ensure smartparens
   :init
   (smartparens-global-mode 1))
-
-;; (require 'make-mode)
 
 (use-package slime
   :config
