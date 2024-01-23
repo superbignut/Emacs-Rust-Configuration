@@ -69,16 +69,22 @@
   :config
   (setq eldoc-documentation-functions nil)
   (setq lsp-enable-symbol-highlighting t)
-  (setq lsp-signature-auto-activate t)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-signature-render-documentation nil)
+
 
   (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 
-(use-package lsp-python-ms
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-python-ms)
-                         (lsp))))
+;; (use-package lsp-python-ms
+;;   :init (setq lsp-python-ms-auto-install-server t)
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-python-ms)
+;;                          (lsp))))
+
+;; (use-package anaconda-mode
+;;   :hook
+;;   (python-mode . anaconda-mode))
 
 (use-package tree-sitter
   :config
