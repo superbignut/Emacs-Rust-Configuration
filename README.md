@@ -32,25 +32,25 @@
     2. B站/知乎上的[《Emacs高手修炼手册》][1]一步一步配置出Emacs的基本功能
     3. NykMa个人网站上的[《Emacs 自力求生指南》][2]有他对的Emacs配置的详细说明
     4. 子龙山人的[《21天学会Emacs》][3]
-    5. Github的Awesome系列[awesome-elisp][5]，其中的[Emacs In A Box - Elisp Programming][6]
+    5. Github的Awesome系列 [awesome-elisp][5]，其中的 [Emacs In A Box - Elisp Programming][6]
     6. 国内的 Emacs圈子 [Emacs-China][4]
     7. 官方的Emacs手册 [GNU Emacs manual][7]
     8. 官方的Elisp参考手册 [Emacs Lisp Reference Manual][8]
     9. 官方的不那么硬核的 [An Introduction to Programming in Emacs Lisp][9]
     10. tuhdo的一系列教程 [Emacs mini manual series][11]，甚至还有Helm教程
-    11. Robert Krahn的 [Emacs-Rust][12]入门级详细配置，包括lsp，rustic，lsp-ui
-    12. [Lsp Mode 官网][14]里面有详细的各种语言的配置和参考链接
+    11. Robert Krahn的 [Emacs-Rust][12] 入门级详细配置，包括lsp，rustic，lsp-ui
+    12. [Lsp Mode 官网][14] 里面有详细的各种语言的配置和参考链接
     13. [clangd 官网][15] 的说明和 Troubleshooting
 
-+ ### 5. My-Trouble
++ ### 5. My-Trouble and Debug C++
         
-    1. 在配置c++的时候，缺少 json文件导致 Emacs 无法识别项目结构，类似于在vscode中的 json一样。
+  1. 在配置c++的时候，缺少 json文件导致 Emacs 无法识别项目结构，类似于在vscode中的 json一样。
         
         解决办法在LSP-MODE和CLANGD中都有指出，我是使用CMAKE构建项目的，所以可以直接生成 json文件 :
 
                 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 
-    2. json配置好后，项目结构没问题，但发现系统文件<string>之类都无法被识别。
+  2. json配置好后，项目结构没问题，但发现系统文件<string>之类都无法被识别。
         解决办法是[Stack Overflow][16] 中提到的:
 
                 $ clang -v
@@ -63,9 +63,50 @@
                         Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
                         Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13
                         Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13
-        查看clangd的使用的GCC的版本，Selected 一行中可以看到我这里的是 13，进而安装相应的库：
+        查看clangd的使用的GCC的版本，Selected 一行中可以看到我这里的是 13，进而安装相应的库:
 
                 sudo apt install libstdc++-13-dev
+
+  3. 对 c++ 进行 debug的话，就回到 vscode中，这里就不在 Emacs 中折腾了，参考 [vscode官网][17]，launch.json 配置如下:
+
+
+                {
+                        "version": "0.2.0",
+                        "configurations": [
+
+                        {
+                                "name": "My-Debug",
+                                "type": "cppdbg",
+                                "request": "launch",
+                                "program": "${workspaceFolder}/test",   // Change here.
+                                "args": [],
+                                "stopAtEntry": false, 
+                                "cwd": "${workspaceFolder}",            // Change here.
+                                "environment": [],
+                                "MIMode": "gdb",
+                                "setupCommands": [
+                                {
+                                        "description": "Enable pretty-printing for gdb",
+                                        "text": "-enable-pretty-printing",
+                                        "ignoreFailures": true
+                                },
+                                {
+                                        "description": "Set Disassembly Flavor to Intel",
+                                        "text": "-gdb-set disassembly-flavor intel",
+                                        "ignoreFailures": true
+                                }
+                                ]
+                        }
+                        ]
+                }
+        
+        值的注意的是，为了编译出可调试的版本，在CMake构建项目时，需要额外的参数而不是单纯的 cmake  ..
+
+                cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+        而 make 和 g++ 则是要 添加 -g
+
+                g++ -g main.cpp -o main
 
 <!-- ### 以下均为在Ubuntu22.04中对Emacs27/29的个人配置和理解
 ---
@@ -223,3 +264,4 @@ helm-occur 当前文件搜索 -->
 [14]:https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
 [15]:https://clangd.llvm.org/
 [16]:https://stackoverflow.com/questions/26333823/clang-doesnt-see-basic-headers/74759390#74759390
+[17]:https://code.visualstudio.com/docs/cpp/launch-json-reference
