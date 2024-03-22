@@ -7,7 +7,9 @@
 ;; Besides, the order of the followed configuration is meaningful.
 
 ;;; Code:
-(if (window-system) (set-frame-size (selected-frame) 190 55)) ;;window size.
+;; (set-face-attribute 'default nil :height 140)
+
+(if (window-system) (set-frame-size (selected-frame) 250 82)) ;;window size.
 
 (defun frame-center ()
   "Center the current frame."
@@ -174,8 +176,8 @@
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files) ;;
 	 ("M-y" . helm-show-kill-ring) ;;emacs kill ring plus
-         ("C-M-j" . helm-mini) ;;
-         ("C-M-j" . helm-buffers-list) ;;
+         ;; ("C-M-j" . helm-mini) ;;
+         ;; ("C-M-j" . helm-buffers-list) ;;
          ("C-c h o" . helm-occur) ;; find in temp file.
          ("C-c h i" . helm-imenu) ;; show emacs imenu.
 	 ("C-c h s" . helm-occur-visible-buffers)
@@ -257,12 +259,12 @@
    ("C-h F" . helpful-function)))
 
 (use-package avy
-  :bind (("C-'" . avy-goto-char-timer)
+  :bind (("C-`" . avy-goto-char-timer)
          ("C-c C-j" . avy-resume))
   :config
   (setq avy-background t
         avy-all-windows t
-        avy-timeout-seconds 0.3))
+        avy-timeout-seconds 0.7))
 
 (use-package ctrlf
   :config

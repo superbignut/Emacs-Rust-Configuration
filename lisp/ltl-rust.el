@@ -10,7 +10,7 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-lens-enable nil)
-  (setq lsp-ui-doc-show-with-cursor t)
+  (setq lsp-ui-doc-show-with-cursor nil)
   (setq lsp-ui-doc-delay 1)
   (setq lsp-signature-auto-activate nil)
   (setq lsp-eldoc-enable-hover nil)
@@ -124,6 +124,27 @@
 (setq-default ff-other-file-alist 'my-cpp-other-file-alist)
 
 (add-hook 'c-initialization-hook (lambda () (local-set-key (kbd "C-c o") 'ff-find-other-file)))
+
+
+
+;; (use-package dap-mode
+;;   ;; Uncomment the config below if you want all UI panes to be hidden by default!
+;;   ;; :custom
+;;   ;; (lsp-enable-dap-auto-configure nil)
+;;   ;; :config
+;;   ;; (dap-ui-mode 1)
+
+;;   :config
+;;   ;; Set up Node debugging
+;;   (require 'dap-node)
+;;   (dap-node-setup) ;; Automatically installs Node debug adapter if needed
+
+;;   ;; Bind `C-c l d` to `dap-hydra` for easy access
+;;   ;; (general-define-key
+;;   ;;   :keymaps 'lsp-mode-map
+;;   ;;   :prefix lsp-keymap-prefix
+;;   ;;   "d" '(dap-hydra t :wk "debugger")))
+;;   )
 
 (provide 'ltl-rust)
 

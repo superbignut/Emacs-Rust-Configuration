@@ -5,12 +5,13 @@
 ---
 ## 前言：
 + ### 1. 简介：
-    这是一个面向新手 ~~我自己~~ 的用于写Rust的 Emacs 配置，目前只有3个配置文件。
+    这是一个面向新手 ~~我自己~~ 的用于写Rust 和 cpp 的 Emacs 配置，目前只有3个配置文件。
+    
 
 
     + init.el 包含了最基本的配置和一些修改。
     + lisp/treemacs.el 是treemacs官方配置，~~只修改了两行~~。
-    + lisp/rust.el 内容主要来自[参考11][12]，并使用 tree-sitter 强化了代码高亮。
+    + lisp/rust.el 内容主要来自[参考11][12] 和 [参考12][12]，并使用 tree-sitter 强化了代码高亮。
 
 
 + ### 2. 主要插件：
@@ -27,22 +28,46 @@
 ![Error](https://github.com/superbignut/Emacs-SMCM/blob/master/screenshots/error.png)
 
 + ### 4. 配置参考：
-    1. Emacs欢迎界面上的Emacs tutorial。包含了Emacs的最基本按键和功能，入门第一看。
-    2. B站/知乎上的[《Emacs高手修炼手册》][1]一步一步配置出Emacs的基本功能，入门必备。
-    3. NykMa个人网站上的[《Emacs 自力求生指南》][2]有他对的Emacs配置的详细说明，入门必备。
-    4. 子龙山人的[《21天学会Emacs》][3]，入门必备，慢慢回味。
-    5. Github的Awesome系列[awesome-elisp][5]，其中的[Emacs In A Box - Elisp Programming][6]，入门必备。
-    6. 没事的时候要去逛一逛的[Emacs-China][4],会有大佬的配置发在上面。
-    7. 最官方的Emacs手册[GNU Emacs manual][7]，但是内容实在太多了。
-    8. 最官方的Elisp参考手册[Emacs Lisp Reference Manual][8]，内容也是特别多。
-    9. Emacs官网的不那么硬核的[An Introduction to Programming in Emacs Lisp][9]，前几章入门必备。
-    10. tuhdo的一系列教程[Emacs mini manual series][11]，甚至还有Helm教程。但最近404了。
-    11. Robert Krahn的[Emacs-Rust][12]入门级详细配置，包括lsp，rustic，lsp-ui，无敌强推。
+    1. Emacs欢迎界面上的Emacs tutorial。包含了Emacs的最基本按键和功能
+    2. B站/知乎上的[《Emacs高手修炼手册》][1]一步一步配置出Emacs的基本功能
+    3. NykMa个人网站上的[《Emacs 自力求生指南》][2]有他对的Emacs配置的详细说明
+    4. 子龙山人的[《21天学会Emacs》][3]
+    5. Github的Awesome系列[awesome-elisp][5]，其中的[Emacs In A Box - Elisp Programming][6]
+    6. 国内的 Emacs圈子 [Emacs-China][4]
+    7. 官方的Emacs手册 [GNU Emacs manual][7]
+    8. 官方的Elisp参考手册 [Emacs Lisp Reference Manual][8]
+    9. 官方的不那么硬核的 [An Introduction to Programming in Emacs Lisp][9]
+    10. tuhdo的一系列教程 [Emacs mini manual series][11]，甚至还有Helm教程
+    11. Robert Krahn的 [Emacs-Rust][12]入门级详细配置，包括lsp，rustic，lsp-ui
+    12. [Lsp Mode 官网][14]里面有详细的各种语言的配置和参考链接
+    13. [clangd 官网][15] 的说明和 Troubleshooting
 
++ ### 5. My-Trouble
+        
+    1. 在配置c++的时候，缺少 json文件导致 Emacs 无法识别项目结构，类似于在vscode中的 json一样。
+        
+        解决办法在LSP-MODE和CLANGD中都有指出，我是使用CMAKE构建项目的，所以可以直接生成 json文件 :
 
-## 内容：
+                cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 
-### 以下均为在Ubuntu22.04中对Emacs27/29的个人配置和理解
+    2. json配置好后，项目结构没问题，但发现系统文件<string>之类都无法被识别。
+        解决办法是[Stack Overflow][16] 中提到的:
+
+                $ clang -v
+                        Ubuntu clang version 14.0.0-1ubuntu1.1
+                        Target: x86_64-pc-linux-gnu
+                        Thread model: posix
+                        InstalledDir: /usr/bin
+                        Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10
+                        Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11
+                        Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+                        Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13
+                        Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13
+        查看clangd的使用的GCC的版本，Selected 一行中可以看到我这里的是 13，进而安装相应的库：
+
+                sudo apt install libstdc++-13-dev
+
+<!-- ### 以下均为在Ubuntu22.04中对Emacs27/29的个人配置和理解
 ---
 
         (tool-bar-mode -1)
@@ -171,7 +196,7 @@
                 ("C-c h i" . helm-imenu);; 7 加强版imenu
                 ;;helm-man-woman C-c c m ;; 8 可以看linux和Emacs的man手册
                 ;; helm-find ;; 9 类似于find
-                ("C-c h g" . helm-do-grep-ag))) ;; 10 这个应该是项目内搜索
+                ("C-c h g" . helm-do-grep-ag))) ;; 10 这个应该是项目内搜索 -->
         
 <!-- helm-buffers-list 类似于 “C-x 
 helm-occur 当前文件搜索 -->
@@ -195,3 +220,6 @@ helm-occur 当前文件搜索 -->
 [11]:https://tuhdo.github.io/index.html
 [12]:https://robert.kra.hn/posts/rust-emacs-setup/#inline-errors
 [13]:https://www.emacswiki.org/emacs/PareditCheatsheet
+[14]:https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
+[15]:https://clangd.llvm.org/
+[16]:https://stackoverflow.com/questions/26333823/clang-doesnt-see-basic-headers/74759390#74759390
